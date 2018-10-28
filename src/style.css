@@ -1,0 +1,13 @@
+.input {
+  border: 1px red solid;
+}
+.test-enter {
+  opacity:0
+}
+.test-enter-active {
+  opacity:1;
+  transition:opacity 1s ease-in;
+}
+.test-enter-done {
+  opacity:1
+}
