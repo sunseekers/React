@@ -93,5 +93,5 @@ class Welcome extends React.Component {
 
 父组件给子组件传递数据是单项的，通过`props` ,如果子组件要修改父组件的数据，只能通过子组件触发父组件的方法在父组件里面修改，子组件是不能直接修改的，在 `vue` 和 `react`里面都是一样的，只是语法不一样。上面有一个例子讲到了，还特意解释了一下想知道翻上去看一看
 
-`react` 简单的就到这里，路由呀，中间件呀，等我学到那里在来说吧。我是初学者请多多指教，有什么写的不对或者不好的欢迎评论指出。[案例DEMO](https://github.com/sunseekers/React/tree/master/demo)
+`react` 简单的就到这里，路由呀，中间件呀，等我学到那里在来说吧。我是初学者请多多指教，有什么写的不对或者不好的欢迎评论指出。[案例DEMO](https://github.com/sunseekers/React/tree/master/DEMO)
 
