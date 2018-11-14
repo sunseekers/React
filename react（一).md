@@ -30,6 +30,7 @@ const img = <img src={https://reactjs.org/docs/introducing-jsx.html}/>
 组件名称总是大写字母开始，为了区分组件和 `DOM` 标签
 我自己简单粗暴的理解 `JSX` 就是用 `js` 的形式把 `html` 搬移过来，拥有 `javaScript` 和 `html` 原来所拥有的，然后 `react` 帮助你去解析
 在项目中的使用
+
 <img src='./public/img/jxs.png'>
 <img src='./public/img/jsx.png'>
 
@@ -74,11 +75,13 @@ class Welcome extends React.Component {
 生命周期函数是指在某一时刻组件会自动调用执行的函数
 ## State
  `React` 很灵活，但是它有一条严格的规则  `reducer()` 生命周期函数( 或者说 `react` 组件 ) 必须是纯函数（纯函数，给固定的输入，就一定会有固定的输出，而且不会有任何副作用，不允许修改自身的 `props` ，在案例中我们要修改数据都借助 `state` 状态
+
  <img src='./public/img/state.png'>
 
  `state` 里面的数据我们不能直接修改，直接修改并不会重新渲染一个组件，我们需要借助 `setState()` ( 状态更新是异步的，解决这个问题我们常常在 `setState` 里面调用函数，函数接受两个参数，一个是更新前的一个是更新后的；不建议 `setState`  里面使用对象的形式,所以我就没有举例 )
 
  细心的朋友一定发现了，在案例中我们使用了循环渲染。通过使用数组的 `map`，在 `react` 里面可以使用条件渲染，循环渲染。`react` 中一个 {} 表示是一个 `js` 表达式，{{}}这种，外层表示  `js`  表达式，内层是  `js`  对象；
+
  <img src='./public/img/map.png'>
  
 条件渲染也很简单，就和我们平常写js一样
@@ -90,5 +93,5 @@ class Welcome extends React.Component {
 
 父组件给子组件传递数据是单项的，通过`props` ,如果子组件要修改父组件的数据，只能通过子组件触发父组件的方法在父组件里面修改，子组件是不能直接修改的，在 `vue` 和 `react`里面都是一样的，只是语法不一样。上面有一个例子讲到了，还特意解释了一下想知道翻上去看一看
 
-`react` 简单的就到这里，路由呀，中间件呀，等我学到那里在来说吧。我是初学者请多多指教，有什么写的不对或者不好的欢迎评论指出。
+`react` 简单的就到这里，路由呀，中间件呀，等我学到那里在来说吧。我是初学者请多多指教，有什么写的不对或者不好的欢迎评论指出。[案例DEMO](https://github.com/sunseekers/React/tree/master/demo)
 
