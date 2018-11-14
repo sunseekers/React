@@ -1,8 +1,11 @@
 import React ,{ Component,Fragment } from 'react';
 import TodoItem from './TodoItem';
 import './style.css';//一般会先引入组件，最后引入样式
+import store from './store/index.js'//引入仓库
+import store from './store/actionTypes'
+import { getInputChangeAction } from './store/actionCreators';
 class TodoList extends Component {
-  constructor(props){//优于任何函数，会被自动执行的函数
+  constructor(props){//构造函数优于任何函数，会被自动执行的函数
     super(props)//调用父类
     //当组件的state或者props（因为props的值来自state）发生改变的时候，render函数就会重新执行
     this.state = {//定义数据需要把数据放在状态里面（this.state就是这个组件的状态）
@@ -12,6 +15,16 @@ class TodoList extends Component {
     // 一般把this问题的绑定放在页面的顶部,提升性能优化，整个程序里面只会执行一次，避免子组件的无谓渲染
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleBtnClick = this.handleBtnClick.bind(this)
+    console.log(store.getState())
+    //store里面的数据变化，外面的也要跟着变化
+    store.subscribe(this.handleStoreChange)
+    this.handleStoreChange = this.handleStoreChange.bind(this)
+    //store.getState() 获取store里面的数据
+  }
+  handleStoreChange(){
+    console.log('store change')
+    this.setState(store.getState())//当store里面的数据发生变动的时候
+    //store.getState()拿出数据，重新去设置他，渲染
   }
  //声明周期函数
   componentWillMount(){
@@ -115,6 +128,12 @@ class TodoList extends Component {
     this.setState(()=>({
       inputValue:value
     }))
+    // const action = {
+    //   type:Type[CHANGE_INPUT_VALUE],//做什么事
+    //   value:e.target.value
+    // }换成下面一句
+    const action = getInputChangeAction(e.target.value)
+    store.dispatch(action)
   }
   handleBtnClick(){
     // this.setState({

@@ -87,3 +87,47 @@ ajax请求数据的时候建议在`componentDidMount()`,组件被挂载在页面
 
 
 生命周期函数是指在某一时刻组件会自动调用执行的函数`render`函数(`constructor`是ES6类所有的函数，不是`react`所独有的)
+
+
+JXS 可以使用表达式，函数或者对象的形式
+```
+const name = 'Josh Perez';
+const element = <h1>Hello, {name}</h1>;
+
+function formatName(user) {
+  return user.firstName + ' ' + user.lastName;
+}
+
+const user = {
+  firstName: 'Harper',
+  lastName: 'Perez'
+};
+
+const element = (
+  <h1>
+    Hello, {formatName(user)}!
+  </h1>
+);
+
+```
+this.setState()里面传一个对象更新可能会是一个异步，解决方案里面传递一个函数
+
+
+ <button onClick={(e) => this.handleClick(e)}></button> (不建议使用，每一次回调都会重新渲染，当有props传递进来数据的时候，浪费性能。可以替换this的绑定问题，等价于底下
+  <button onClick={this.handleClick.bind(this)}></button>
+
+  如果我们希望组件隐藏自身，我们可以使用返回null，而不是其渲染输出https://reactjs.org/docs/conditional-rendering.html
+
+  状态提升和父子组件传值没有什么区别（基本一模一样）
+
+  store 是唯一
+  只有store才能改变store的内容（我们用了深层拷贝）
+  reducer 必须是纯函数（纯函数，给固定的输入，就一定会有固定的输出，而且不会有任何副作用
+
+  ui组件里面只有一个render函数，其他的都是传参进来的
+
+  中间件（redux）指的是action和store之间通信用的，原来action只能是对象才能把数据传递给store，加入中间件action是函数也可以了
+
+  目前大部分的异步处理都使用redux-saga中间件
+
+  
