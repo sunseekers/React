@@ -33,8 +33,14 @@ class TodoList extends Component {
   componentDidMount(){
     console.log('componentDidMount：当第一次在组件挂载到页面的之后自动执行')
   }
-  shouldComponentUpdate(){
+  //询问逐渐是否要被更新，当一个组件的属性或者状态只要有一个发生变化，默认就会重新渲染，这个钩子函数适合做优化
+  shouldComponentUpdate(nextProps,nextState){
     console.log("shouldComponentUpdate：组件被更新之前，他会自动被执行")
+    if (nextState.count < 10) {//累加计数器
+      return true
+    }else {
+      return false
+    }
     return true//需要返回true或false，如果返回false，组件将不被更新；
   }
   //他和shouldComponentUpdate的区别：如果shouldComponentUpdate返回false，这个函数不被执行

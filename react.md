@@ -130,4 +130,78 @@ this.setState()里面传一个对象更新可能会是一个异步，解决方�
 
   目前大部分的异步处理都使用redux-saga中间件
 
-  
+  this.props 由 React 本身设定, 而 this.state 具有特殊的含义，如果您需要存储不参与数据流的内容（如计时器 ID ），则可以自由向该类手动添加其他字段。
+
+  在`react`中，属性是父传子，状态是组件自己控制
+
+  定义一个组件如何渲染，其实就是返回一个`react`函数
+
+  `componentDidMount()` 挂载完成，`react` 把一个虚拟的`DOM`转成真实的`DOM`之后自动执行的方法
+
+  `componentWillUnmount()` 当`react` 准备销毁一个组件，会自动调用此方法，进行一些资源的释放和清理工作
+
+  解决`this`指向的三种方式
+  this.handChange.bind(this)
+  class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+
+    // 这个绑定是必要的，使`this`在回调中起作用
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(state => ({
+      isToggleOn: !state.isToggleOn
+    }));
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      </button>
+    );
+  }
+}
+
+ReactDOM.render(
+  <Toggle />,
+  document.getElementById('root')
+);
+  ()=>this.handChange()
+  class LoggingButton extends React.Component {
+  handleClick() {
+    console.log('this is:', this);
+  }
+
+  render() {
+    // This syntax ensures `this` is bound within handleClick
+    return (
+      <button onClick={(e) => this.handleClick(e)}>
+        Click me
+      </button>
+    );
+  }
+}
+
+  handChange=()=>{//ES7的写法
+
+  }
+  class LoggingButton extends React.Component {
+  // 这个语法确保 `this` 绑定在 handleClick 中。
+  // 警告：这是 *实验性的* 语法。
+  handleClick = () => {
+    console.log('this is:', this);
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        Click me
+      </button>
+    );
+  }
+}
+  {}只能放表达式，不能放js语句，因为他需要一个返回值

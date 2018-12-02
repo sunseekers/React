@@ -61,3 +61,28 @@ class Clock extends React.Component {
     )
   }
 }
+
+
+class Toggle extends Component {
+  constructor(props) {
+    super(props)
+    this.state={
+      isToggle:false
+    }
+    this.handleChange = this.handleChange.bind(this)
+  }
+  handleChange(){
+    this.setState((preState)=>({
+      isToggle:!preState.isToggle
+    }))
+  }
+  render(){
+    return (
+      <div>
+        <button onClick={this.handleChange}>
+        {this.state.isToggle? 'NO':'Yes'}
+        </button>
+      </div>
+    )
+  }
+}
