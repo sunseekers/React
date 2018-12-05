@@ -3,6 +3,7 @@
 <img src='./public/img/lifecycle.png'>
 
 `react` 也有他的生命周期函数，每一个版本钩子函数有一点点小小小的区别，但是我们常用的那些个钩子函数一直存在
+<img src='./public/img/reactLift.png'/>
 我们通过 `console.log` 日志来看看，这些钩子函数在什么时候执行
 
 <img src='./public/img/react6.png'/>
@@ -34,16 +35,45 @@
 通过和 `vue` 的生命周期函数一对比，发现好像是差不多的。只是在写法上不一样而已。在我们的项目中，数据的获取都是接口请求获取异步数据的，那么我们在哪一个生命周期函数里面去写更好一点呢？？我推荐 `componentDidMount()` ，
 
 ## state
-既然是异步获取数据，如果我们一股脑子都写在了`componentDidMount()`，是没有问题的，但是作为一个有追求的前端，在长远角度我们更加喜欢好维护的代码。我通常建议数据视图分开
+既然是异步获取数据，如果我们一股脑子都写在了`componentDidMount()`，是没有问题的，但是作为一个有追求的前端，在长远角度我们更加喜欢好维护的代码。我通常建议数据视图分开。在 `vue` 中我们用 `vuex`管理数据。那么在 `react` 我们又是如何管理数据的呢？
 
 在一个复杂的项目中，我们有大量的数据需要维护修改，每次数据修改 `render()` 都会被更新。秉持数据视图分开的原则，我建议使用 `state` 仓库来管理数据。把我前面说的接口异步请求也放在这个里面
 
-<img src='/public/img/states.png'/>
+<img src='./public/img/states.png'/>
 
 看图说话，我们假设这是一个图书馆管理系统，`react Component` 就是用户（借书人），他要借书就会创建一个行为 `Action creators` ，行为就会触发一个动作 `dispatch(action)` ，告诉图书馆管理员（`state`），用户要借的书。`state` 拿着用户要借的书去数据库里面查 `reducers` ，数据库会把最后的结果告诉图书馆管理员（`state`），图书管理员在把结果告诉给用户。
 
 看上去好像有点麻烦，多写两遍就好了。熟能生巧。流程图中有四个步骤，那我们也应该要建立四个文件，就和 `vuex` 的数据管理有一点点的类似，但是他们又各有各的特色
 <img src='./public/img/actionCreators.png'>
 <img src='./public/img/actionType.png'>
-<img src='./public/img/index.png'>
 <img src='./public/img/reducer.png'>
+<img src='./public/img/index.png'>
+
+我们建立了上面四个文件夹之后，要如何在我们的页面中导入使用呢？其实也很简单
+### `state` 进阶
+当我们的项目变得很大的时候，把所有的数据都写在一个文件
+
+## ref
+如果你写过 `vue` 肯定用过 `ref` 这个东西。在 `react` 中 `ref` 含义是一样的，只是语法写的不一样。
+
+在 `react`中 `ref` 的使用
+
+<img src='./public/img/ref1.png'/>
+<img src='./public/img/ref2.png'/>
+
+在 `vue`中 `ref` 的使用
+
+<img src='./public/img/vueref.png'>
+
+在 `vue` 的工作中，这个东西我用的还是比较频繁的，在父组件的兄弟组件中去调用子组件的方法。我所理解的他就是一个引用，一个别名，一个ID，通过他可以获取数据操作方法
+
+## 插槽
+我首先接触的是 `vue` ，在学习 `react` 的时候我总在想，`vue` 里面有的东西，`react` 里面有没有呢？文档证明是真的有。
+
+在 `vue` 中写公共组件的时候，插槽这东西用的比较多。在写公共组件的时候总会考虑到，有那么一两个特别，需要特殊处理，而大部分的时候是不需要处理的，这时候我们就需要在公共组件里面预留一个位置，这样就不要再重新写一段差不多的代码了。在 `react` 中也存在这东西，用法都差不多
+
+<img src='./public/img/portals1.png'/>
+<img src='./public/img/portals2.png'/>
+
+写插槽类的时候我们首先要引入 `createPartal` 这个组件，这个组件接受两个参数，第一个是要渲染的子元素(包括共有的和占位元素 `this.props.children`)，第二个是要挂载的元素
+[案例DOME]()

@@ -4,6 +4,7 @@ import HomePage from './HomePage'
 import Memo from './highorder'
 import Model from './Model'
 import ErrorBoundary from './ErrorBoundary'
+import Portals from './portals'
 class TodoList extends Component {
   constructor(props) {
     super(props)
@@ -45,11 +46,11 @@ class TodoList extends Component {
             })
           }
         </ul>
-        <LifeCycle/>
-        <HomePage/>
+        <HomePage ref={ele=>this.ele = ele}/>
         <Memo/>
         <Model/>
         <ErrorBoundary/>
+        <Portals/>
       </Fragment>
     )
   }
@@ -62,7 +63,7 @@ class TodoList extends Component {
   }
   handleClick(){
     // 如果给input框附一个username的ref值，那么就可以通过this.refs.username获取到他对应的真实DOM元素
-    console.log(this.username.value)
+    console.log(this.ele)
     this.setState((preState)=>({
       list:[...preState.list,preState.inputVal],
       inputVal:''
